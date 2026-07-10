@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: r-financial-services-api
+    runtime: node
+    repo: https://github.com/risha2420/rfinancial
+    rootDir: backend-source-updated/backend
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://rfinancial.in,https://www.rfinancial.in
+      - key: NOTIFY_EMAIL
+        value: sapan@rfinancial.in
+      - key: SMTP_HOST
+        value: smtp.resend.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_SECURE
+        value: "false"
+      - key: SMTP_USER
+        value: resend
+      - key: SMTP_PASS
+        sync: false
+      - key: MAIL_FROM
+        value: R Financial Services <sapan@rfinancial.in>
