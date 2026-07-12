@@ -1,4 +1,4 @@
-name = "r-financial-services"
+name = "rfinancial"
 compatibility_date = "2026-07-10"
 
 main = "src/index.js"
