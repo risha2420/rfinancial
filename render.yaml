@@ -10,7 +10,7 @@ services:
       - key: MONGODB_URI
         sync: false
       - key: ALLOWED_ORIGINS
-        value: https://rfinancial.in,https://www.rfinancial.in
+        value: https://rfinancial.in,https://www.rfinancial.in,https://r-financial-services.ritishah2420.workers.dev
       - key: NOTIFY_EMAIL
         value: sapan@rfinancial.in
       - key: SMTP_HOST

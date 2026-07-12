@@ -9,8 +9,6 @@ const formsRouter = require('./routes/forms');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
-
 if (!MONGODB_URI) {
   console.error('Missing MONGODB_URI in .env — copy .env.example to .env and fill it in.');
   process.exit(1);
@@ -18,9 +16,11 @@ if (!MONGODB_URI) {
 
 // --- Middleware ---
 app.use(express.json({ limit: '200kb' }));
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const corsOrigins = allowedOrigins.length ? [...allowedOrigins, 'null'] : '*';
 app.use(
   cors({
-    origin: ALLOWED_ORIGINS.length ? ALLOWED_ORIGINS : '*',
+    origin: corsOrigins,
     methods: ['GET', 'POST'],
   })
 );

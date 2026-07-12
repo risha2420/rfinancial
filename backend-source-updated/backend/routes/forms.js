@@ -61,7 +61,9 @@ router.post('/contact', async (req, res) => {
       details: `Subject: ${doc.subject || '(none)'}\n\n${doc.message || '(no message)'}`,
       timestamp: doc.createdAt.toISOString()
     });
-    sendNotification('New Inquiry/Application from Website', emailBody);
+    sendNotification('New Inquiry/Application from Website', emailBody)
+      .then(r => { if (!r.ok) console.error('[contact] Email failed:', r.error); })
+      .catch(e => console.error('[contact] Email error:', e));
 
     res.status(201).json({ ok: true, id: doc._id });
   } catch (err) {
@@ -96,7 +98,9 @@ router.post('/loan-enquiry', async (req, res) => {
       details: `Loan Type: ${doc.loanType}\n\n${doc.message || '(no message)'}`,
       timestamp: doc.createdAt.toISOString()
     });
-    sendNotification('New Inquiry/Application from Website', emailBody);
+    sendNotification('New Inquiry/Application from Website', emailBody)
+      .then(r => { if (!r.ok) console.error('[loan-enquiry] Email failed:', r.error); })
+      .catch(e => console.error('[loan-enquiry] Email error:', e));
 
     res.status(201).json({ ok: true, id: doc._id });
   } catch (err) {
@@ -130,7 +134,9 @@ router.post('/callback-request', async (req, res) => {
       details: `Preferred time: ${doc.preferredTime || '(any time)'}\nContext: ${doc.context || '(none)'}`,
       timestamp: doc.createdAt.toISOString()
     });
-    sendNotification('New Inquiry/Application from Website', emailBody);
+    sendNotification('New Inquiry/Application from Website', emailBody)
+      .then(r => { if (!r.ok) console.error('[callback] Email failed:', r.error); })
+      .catch(e => console.error('[callback] Email error:', e));
 
     res.status(201).json({ ok: true, id: doc._id });
   } catch (err) {
